@@ -1,9 +1,9 @@
 import { useState } from "react";
 import axios from "axios";
-import { Container, Typography, Alert } from "@mui/material";
+import { Container, Typography, Alert, Box } from "@mui/material";
 import WeatherForm from "./Components/WeatherForm";
 import WeatherDisplay from "./Components/WeatherDisplay";
-import { Box, Container, Typography, Alert } from "@mui/material";
+import backgroundImage from "./assets/saturn.jpg";
 
 export default function App() {
   const [city, setCity] = useState("");
@@ -39,20 +39,40 @@ export default function App() {
   };
 
   return (
-    <Container maxWidth="sm" sx={{ mt: 6 }}>
-      <Typography variant="h4" align="center" gutterBottom>
-        Weather App 🌍
-      </Typography>
+    <Box
+      sx={{
+        minHeight: '100vh',
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}
+    >
+      <Container maxWidth="sm" sx={{ 
+        backgroundColor: 'rgba(255, 255, 255, 0.1)',
+        backdropFilter: 'blur(10px)',
+        borderRadius: 3,
+        padding: 4,
+        border: '1px solid rgba(255, 255, 255, 0.2)',
+        boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)'
+      }}>
+        <Typography variant="h4" align="center" gutterBottom sx={{ color: 'white', fontWeight: 'bold', textShadow: '2px 2px 4px rgba(0,0,0,0.3)' }}>
+          Weather App 🌍
+        </Typography>
 
-      <WeatherForm city={city} setCity={setCity} fetchWeather={fetchWeather} />
+        <WeatherForm city={city} setCity={setCity} fetchWeather={fetchWeather} />
 
-      {error && (
-        <Alert severity="error" sx={{ mt: 2 }}>
-          {error}
-        </Alert>
-      )}
+        {error && (
+          <Alert severity="error" sx={{ mt: 2 }}>
+            {error}
+          </Alert>
+        )}
 
-      {weather && <WeatherDisplay weather={weather} />}
-    </Container>
+        {weather && <WeatherDisplay weather={weather} />}
+      </Container>
+    </Box>
   );
 }
