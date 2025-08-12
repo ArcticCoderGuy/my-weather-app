@@ -25,4 +25,20 @@ If you are developing a production application, we recommend using TypeScript wi
 
 Tehdään MUI-projektin muutos ja Saturnus-teemalla
 
-Lisää riviä
+1. Eli asennetaan noi MUI-systeemit;
+
+npm i axios @mui/material @emotion/react @emotion/styled @mui/icons-material
+
+-> "added 254 packages, and audited 255 packages in 2m
+
+57 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities" 
+
+2. Laitetaan Propit komponenteille jossa nyt importattu uudet romppeet
+
+- App.jsx
+- WeatherDisplay.jsx
+- index.css
+
