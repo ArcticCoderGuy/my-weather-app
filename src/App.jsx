@@ -47,9 +47,9 @@ export default function App() {
     <Box
       sx={{
         minHeight: "100vh",
-        backgroundImage: `linear-gradient(rgba(11,16,32,.70), rgba(11,16,32,.70)), url(${saturnBg})`,
+        backgroundImage: `linear-gradient(rgba(11,16,32,.25), rgba(11,16,32,.25)), url(${saturnBg})`,
         // Jos käytät public/assets -polkua, vaihda yllä oleva riviksi:
-        // backgroundImage: 'linear-gradient(rgba(11,16,32,.70), rgba(11,16,32,.70)), url("/assets/saturn.jpg")',
+        // backgroundImage: 'linear-gradient(rgba(11,16,32,.25), rgba(11,16,32,.25)), url("/assets/saturn.jpg")',
         backgroundSize: "cover",
         backgroundPosition: "center",
         display: "grid",
