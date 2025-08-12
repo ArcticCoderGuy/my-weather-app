@@ -1,50 +1,84 @@
-import { TextField, Button, Stack } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
+import { TextField, Button, Stack, InputAdornment } from "@mui/material";
+import { Search, LocationCity } from "@mui/icons-material";
 
-export default function WeatherForm({ city, setCity, fetchWeather }) {
+export default function WeatherForm({ city, setCity, fetchWeather, loading }) {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    fetchWeather();
+  };
+
   return (
-    <Stack spacing={2} direction="row" alignItems="center">
+    <Stack 
+      component="form"
+      onSubmit={handleSubmit}
+      spacing={2} 
+      direction={{ xs: 'column', sm: 'row' }} 
+      alignItems="stretch"
+    >
       <TextField
-        label="Enter city"
+        fullWidth
+        label="Enter city name"
         variant="outlined"
         value={city}
         onChange={(e) => setCity(e.target.value)}
+        disabled={loading}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <LocationCity sx={{ color: 'rgba(255, 255, 255, 0.5)' }} />
+            </InputAdornment>
+          ),
+        }}
         sx={{
+          flex: 1,
           '& .MuiOutlinedInput-root': {
             color: 'white',
             '& fieldset': {
-              borderColor: 'rgba(255, 255, 255, 0.5)',
+              borderColor: 'rgba(255, 255, 255, 0.3)',
+              borderWidth: 2,
             },
             '&:hover fieldset': {
-              borderColor: 'rgba(255, 255, 255, 0.8)',
+              borderColor: 'rgba(144, 202, 249, 0.5)',
             },
             '&.Mui-focused fieldset': {
-              borderColor: 'white',
+              borderColor: '#90caf9',
             },
           },
           '& .MuiInputLabel-root': {
             color: 'rgba(255, 255, 255, 0.7)',
           },
           '& .MuiInputLabel-root.Mui-focused': {
-            color: 'white',
+            color: '#90caf9',
           },
         }}
       />
       <Button 
+        type="submit"
         variant="contained" 
-        onClick={fetchWeather} 
-        startIcon={<SearchIcon />}
+        size="large"
+        disabled={loading || !city.trim()}
+        startIcon={<Search />}
         sx={{
-          backgroundColor: 'rgba(255, 255, 255, 0.2)',
-          backdropFilter: 'blur(10px)',
+          minWidth: 160,
+          height: 56,
+          background: 'linear-gradient(45deg, #90caf9 30%, #ce93d8 90%)',
           color: 'white',
-          border: '1px solid rgba(255, 255, 255, 0.3)',
+          fontWeight: 600,
+          fontSize: '1rem',
+          boxShadow: '0 3px 5px 2px rgba(144, 202, 249, .3)',
+          transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
           '&:hover': {
-            backgroundColor: 'rgba(255, 255, 255, 0.3)',
-          }
+            background: 'linear-gradient(45deg, #42a5f5 30%, #ab47bc 90%)',
+            transform: 'scale(1.02)',
+            boxShadow: '0 5px 15px 2px rgba(144, 202, 249, .4)',
+          },
+          '&:disabled': {
+            background: 'rgba(255, 255, 255, 0.1)',
+            color: 'rgba(255, 255, 255, 0.3)',
+          },
         }}
       >
-        GET WEATHER
+        {loading ? 'Searching...' : 'Get Weather'}
       </Button>
     </Stack>
   );
